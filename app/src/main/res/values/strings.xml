@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CinemaBox</string>
+    <string name="sort_by_popularity">Sort by popularity</string>
+    <string name="sort_by_rating">Sort by rating</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="release_date">Release Date</string>
+    <string name="duration">Duration</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="rating">Rating</string>
+    <string name="ratingscore">/10</string>
+</resources>
