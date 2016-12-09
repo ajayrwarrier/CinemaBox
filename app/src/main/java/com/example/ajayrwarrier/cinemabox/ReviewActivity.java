@@ -22,7 +22,7 @@ public class ReviewActivity extends AppCompatActivity {
     private ReviewAdapter adapter;
     @BindView(R.id.review_list)
     ListView reviewListView;
-    String API_KEY = "e1f512f380915c0466fafb05d0172794";
+    String API_KEY = "YOUR_API_KEY";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);

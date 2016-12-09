@@ -22,7 +22,7 @@ public class TrailerActivity extends AppCompatActivity {
     private TrailerAdapter adapter;
     @BindView(R.id.trailer_list)
     ListView trailerListView;
-    String API_KEY = "e1f512f380915c0466fafb05d0172794";
+    String API_KEY = "YOUR_API_KEY";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trailer);

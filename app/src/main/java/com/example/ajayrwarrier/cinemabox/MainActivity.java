@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     RestAdapter restAdapter;
     ApiService service;
     static SharedPreferences preferences;
-    String API_KEY = "e1f512f380915c0466fafb05d0172794";
+    String API_KEY = "YOUR_API_KEY";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
