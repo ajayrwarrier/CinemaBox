@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity"/>
+        <activity android:name=".TrailerActivity"/>
+        <activity android:name=".ReviewActivity"/>
     </application>
 
 </manifest>

@@ -8,4 +8,11 @@
     <string name="synopsis">Synopsis</string>
     <string name="rating">Rating</string>
     <string name="ratingscore">/10</string>
+    <string name="trailer">Trailer</string>
+    <string name="read_reviews">Read Reviews</string>
+    <string name="trailers">Trailers</string>
+    <string name="view_favorites">View Favorites</string>
+    <string name="error">There was a Problem, Check your internet connection and Retry</string>
+    <string name="refresh">Refresh</string>
+    <string name="textview">TextView</string>
 </resources>

@@ -8,6 +8,8 @@ public class MovieThumbnail {
     public static final String IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
     @SerializedName("original_title")
     private String title;
+    @SerializedName("id")
+    private String id;
     @SerializedName("poster_path")
     private String poster;
     @SerializedName("overview")
@@ -18,7 +20,6 @@ public class MovieThumbnail {
     private String releaseDate;
     @SerializedName("vote_average")
     private String rating;
-
     public String getDescript() {
         return descript;
     }
@@ -33,6 +34,9 @@ public class MovieThumbnail {
     }
     public String getRating() {
         return rating;
+    }
+    public String getId() {
+        return id;
     }
     public static class MovieResult {
         private List<MovieThumbnail> results;

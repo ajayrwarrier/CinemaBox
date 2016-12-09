@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -16,7 +18,6 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.Movi
     private List<MovieThumbnail> mMovieList = new ArrayList<>();
     private LayoutInflater mInflater;
     private Context mContext;
-
     public MovieGridAdapter(Context context) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(context);
@@ -36,6 +37,7 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.Movi
         holder.poster = movie.getPoster();
         holder.releaseDate = movie.getReleaseDate();
         holder.rating = movie.getRating();
+        holder.id = movie.getId();
         Picasso.with(mContext)
                 .load(movie.getPoster())
                 .placeholder(R.drawable.image_placeholder)
@@ -54,7 +56,7 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.Movi
     }
     public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView imageView;
-        String movieName, poster, releaseDate, rating, synopsis;
+        String movieName, poster, releaseDate, rating, synopsis, id;
         public MovieViewHolder(View itemView) {
             super(itemView);
             itemView.setClickable(true);
@@ -64,6 +66,7 @@ public class MovieGridAdapter extends RecyclerView.Adapter<MovieGridAdapter.Movi
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(v.getContext(), DetailActivity.class);
+            intent.putExtra("id", id);
             intent.putExtra("MovieName", movieName);
             intent.putExtra("Poster", poster);
             intent.putExtra("Release Date", releaseDate);
