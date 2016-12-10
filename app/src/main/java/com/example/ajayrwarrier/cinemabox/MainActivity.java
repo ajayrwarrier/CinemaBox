@@ -19,27 +19,27 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
     static List<MovieThumbnail> movies;
-    private MovieGridAdapter movieGridAdapter;
-    RestAdapter restAdapter;
+    static SharedPreferences preferences;
     private static Bundle mBundleRecyclerViewState;
+    RestAdapter restAdapter;
     ApiService service;
     String KEY_RECYCLER_STATE;
     RecyclerView.LayoutManager layoutManager;
-    static SharedPreferences preferences;
     Parcelable mListState;
     String API_KEY = "YOUR_API_KEY";
+    private RecyclerView recyclerView;
+    private MovieGridAdapter movieGridAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        KEY_RECYCLER_STATE=getString(R.string.state);
+        KEY_RECYCLER_STATE = getString(R.string.state);
         preferences = getSharedPreferences("IdPref", MODE_PRIVATE);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         movieGridAdapter = new MovieGridAdapter(this);
-        layoutManager= recyclerView.getLayoutManager();
+        layoutManager = recyclerView.getLayoutManager();
         recyclerView.setAdapter(movieGridAdapter);
         movies = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         Popular();
-
     }
     protected void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
@@ -66,20 +65,18 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
-
         // Retrieve list state and list/item positions
-        if(state != null)
+        if (state != null)
             mListState = state.getParcelable(KEY_RECYCLER_STATE);
     }
     @Override
     protected void onResume() {
         super.onResume();
-        List<MovieThumbnail> list=new ArrayList<>();
+        List<MovieThumbnail> list = new ArrayList<>();
         if (mListState != null) {
             layoutManager.onRestoreInstanceState(mListState);
-
         }
-        for (MovieThumbnail item : list){
+        for (MovieThumbnail item : list) {
             list.add(item);
         }
         movieGridAdapter.setMovieList(list);
