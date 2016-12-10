@@ -1,13 +1,13 @@
 package com.example.ajayrwarrier.cinemabox;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +23,23 @@ public class MainActivity extends AppCompatActivity {
     static List<MovieThumbnail> movies;
     private MovieGridAdapter movieGridAdapter;
     RestAdapter restAdapter;
+    private static Bundle mBundleRecyclerViewState;
     ApiService service;
+    String KEY_RECYCLER_STATE;
+    RecyclerView.LayoutManager layoutManager;
     static SharedPreferences preferences;
+    Parcelable mListState;
     String API_KEY = "YOUR_API_KEY";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        KEY_RECYCLER_STATE=getString(R.string.state);
         preferences = getSharedPreferences("IdPref", MODE_PRIVATE);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         movieGridAdapter = new MovieGridAdapter(this);
+        layoutManager= recyclerView.getLayoutManager();
         recyclerView.setAdapter(movieGridAdapter);
         movies = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
@@ -50,6 +56,34 @@ public class MainActivity extends AppCompatActivity {
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         Popular();
+
+    }
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        // Save list state
+        mListState = layoutManager.onSaveInstanceState();
+        state.putParcelable(KEY_RECYCLER_STATE, mListState);
+    }
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+
+        // Retrieve list state and list/item positions
+        if(state != null)
+            mListState = state.getParcelable(KEY_RECYCLER_STATE);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<MovieThumbnail> list=new ArrayList<>();
+        if (mListState != null) {
+            layoutManager.onRestoreInstanceState(mListState);
+
+        }
+        for (MovieThumbnail item : list){
+            list.add(item);
+        }
+        movieGridAdapter.setMovieList(list);
+        recyclerView.setAdapter(movieGridAdapter);
     }
     // Creates the Menu
     @Override
